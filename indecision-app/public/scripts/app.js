@@ -1,72 +1,41 @@
 'use strict';
 
-console.log('App.js is running!');
+console.log("app is running");
 
-var appObj = {
-  title: 'Indecision App',
-  //   subtitle: 'A demo to learn ReactJS',
-  options: ['One', 'Two']
+var toggle = false;
+
+var toggleDetails = function toggleDetails() {
+    toggle = !toggle;
+    renderPage();
 };
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    appObj.title
-  ),
-  appObj.subtitle && React.createElement(
-    'p',
-    null,
-    appObj.subtitle
-  ),
-  appObj.options.length > 0 ? React.createElement(
-    'p',
-    null,
-    'Here are your options: ',
-    appObj.options
-  ) : 'No options provided!',
-  React.createElement(
-    'ol',
-    null,
-    React.createElement(
-      'li',
-      null,
-      'Item one'
-    ),
-    React.createElement(
-      'li',
-      null,
-      'Item two'
-    )
-  )
-);
 
-var user = {
-  name: 'Tony Stark',
-  age: 52,
-  location: 'New York'
+var renderPage = function renderPage() {
+    var mainTemplate = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Visibility Toggle'
+        ),
+        React.createElement(
+            'button',
+            { onClick: toggleDetails },
+            toggle ? 'Hide Details' : 'Show Details'
+        ),
+        toggle && React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'p',
+                null,
+                'Here are the details you requested'
+            )
+        )
+    );
+
+    var appRoot = document.getElementById('app');
+    ReactDOM.render(mainTemplate, appRoot);
 };
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    user.name
-  ),
-  React.createElement(
-    'p',
-    null,
-    'Age: ',
-    user.age
-  ),
-  React.createElement(
-    'p',
-    null,
-    'Location: ',
-    user.location
-  )
-);
 
-ReactDOM.render(template, document.getElementById('app'));
+renderPage();

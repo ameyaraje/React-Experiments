@@ -1,41 +1,38 @@
 'use strict';
 
-console.log("app is running");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var toggle = false;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var toggleDetails = function toggleDetails() {
-    toggle = !toggle;
-    renderPage();
-};
+var Person = function () {
+    function Person() {
+        var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
+        var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-var renderPage = function renderPage() {
-    var mainTemplate = React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'h1',
-            null,
-            'Visibility Toggle'
-        ),
-        React.createElement(
-            'button',
-            { onClick: toggleDetails },
-            toggle ? 'Hide Details' : 'Show Details'
-        ),
-        toggle && React.createElement(
-            'div',
-            null,
-            React.createElement(
-                'p',
-                null,
-                'Here are the details you requested'
-            )
-        )
-    );
+        _classCallCheck(this, Person);
 
-    var appRoot = document.getElementById('app');
-    ReactDOM.render(mainTemplate, appRoot);
-};
+        this.name = name;
+        this.age = age;
+    }
 
-renderPage();
+    // constructor (name = 'Anonymous') {
+    //     this.name = name;
+    // }
+
+    _createClass(Person, [{
+        key: 'getDesc',
+        value: function getDesc() {
+            return this.name + ' is ' + this.age + ' year(s) old';
+        }
+    }]);
+
+    return Person;
+}();
+
+var user1 = new Person('Steve Rogers', 25);
+var user2 = new Person('Babu Bhai');
+var user3 = new Person(77);
+
+console.log(user1.getDesc());
+console.log(user2.getDesc());
+console.log(user3.getDesc());

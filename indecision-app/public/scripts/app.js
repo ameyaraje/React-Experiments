@@ -80,6 +80,11 @@ var Action = function (_React$Component3) {
   }
 
   _createClass(Action, [{
+    key: "handleClick",
+    value: function handleClick() {
+      alert("Button clicked");
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
@@ -87,7 +92,7 @@ var Action = function (_React$Component3) {
         null,
         React.createElement(
           "button",
-          null,
+          { onClick: this.handleClick },
           "What do I do?"
         )
       );
@@ -100,18 +105,31 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
   _inherits(Options, _React$Component4);
 
-  function Options() {
+  function Options(props) {
     _classCallCheck(this, Options);
 
-    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+    _this4.removeAll = _this4.removeAll.bind(_this4);
+    return _this4;
   }
 
   _createClass(Options, [{
+    key: "removeAll",
+    value: function removeAll() {
+      console.log(this.props.options);
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
+        React.createElement(
+          "button",
+          { onClick: this.removeAll },
+          "Remove All"
+        ),
         React.createElement(
           "p",
           null,
@@ -157,22 +175,39 @@ var Option = function (_React$Component5) {
 var AddOption = function (_React$Component6) {
   _inherits(AddOption, _React$Component6);
 
-  function AddOption() {
+  function AddOption(props) {
     _classCallCheck(this, AddOption);
 
-    return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+    var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+    _this6.handleTextEntered = _this6.handleTextEntered.bind(_this6);
+    return _this6;
   }
 
   _createClass(AddOption, [{
+    key: "handleTextEntered",
+    value: function handleTextEntered(e) {
+      e.preventDefault();
+      var optionText = e.target.elements.option.value.trim(); // e -> event; e.target -> <form>; e.target.elements -> [<element>....<element>]; e.target.elements."name-of-option".value -> shiz we want
+      if (optionText) {
+        alert(optionText);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
         React.createElement(
-          "p",
-          null,
-          "AddOption component here"
+          "form",
+          { onSubmit: this.handleTextEntered },
+          React.createElement("input", { type: "text", name: "option" }),
+          React.createElement(
+            "button",
+            null,
+            "AddOption"
+          )
         )
       );
     }

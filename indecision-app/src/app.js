@@ -27,19 +27,32 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+  handleClick() {
+    alert("Button clicked");
+  }
   render() {
     return (
       <div>
-        <button>What do I do?</button>
+        <button onClick={this.handleClick}>What do I do?</button>
       </div>
     );
   }
 }
 
 class Options extends React.Component {
+  constructor(props) {
+    super(props);
+    this.removeAll = this.removeAll.bind(this)
+  }
+
+  removeAll() {
+    console.log(this.props.options)
+  }
+
   render() {
     return (
       <div>
+        <button onClick={this.removeAll}>Remove All</button>
         <p>{`Options Component here with length ${this.props.options.length}`}</p>
         {
           this.props.options.map((option) => <Option key={option} opText={option}/>)
@@ -60,10 +73,26 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleTextEntered = this.handleTextEntered.bind(this);
+  }
+  
+  handleTextEntered(e) {
+    e.preventDefault();
+    const optionText = e.target.elements.option.value.trim(); // e -> event; e.target -> <form>; e.target.elements -> [<element>....<element>]; e.target.elements."name-of-option".value -> shiz we want
+    if(optionText) {
+      alert(optionText)
+    }
+  }
+  
   render() {
     return (
       <div>
-        <p>AddOption component here</p>
+      <form onSubmit={this.handleTextEntered}>
+        <input type="text" name="option"></input>
+        <button>AddOption</button>      
+      </form>
       </div>
     );
   }

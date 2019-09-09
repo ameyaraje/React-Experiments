@@ -20,7 +20,7 @@ var IndecisonApp = function (_React$Component) {
     _this.handleSelectOption = _this.handleSelectOption.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
     _this.state = {
-      options: ['One', 'Two', 'Three', 'Four', 'Five']
+      options: props.options
     };
     return _this;
   }
@@ -44,9 +44,9 @@ var IndecisonApp = function (_React$Component) {
     key: 'handleAddOption',
     value: function handleAddOption(option) {
       if (!option) {
-        alert('Enter an option you banana');
-      } else if (this.state.options.indexOf >= 0) {
-        alert('This option already exists');
+        return alert('Enter valid value to add item');
+      } else if (this.state.options.indexOf(option) > -1) {
+        return alert('This option already exists');
       }
 
       this.setState(function (prevState) {
@@ -58,13 +58,12 @@ var IndecisonApp = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var title = "Indecision App";
       var subtitle = "You're a slave now";
 
       return React.createElement(
         'div',
         null,
-        React.createElement(Header, { title: title, subtitle: subtitle }),
+        React.createElement(Header, { subtitle: subtitle }),
         React.createElement(Action, {
           hasOptions: this.state.options.length > 0,
           handleSelectOption: this.handleSelectOption
@@ -83,6 +82,10 @@ var IndecisonApp = function (_React$Component) {
   return IndecisonApp;
 }(React.Component);
 
+IndecisonApp.defaultProps = {
+  options: []
+};
+
 var Header = function Header(props) {
   return React.createElement(
     'div',
@@ -98,6 +101,10 @@ var Header = function Header(props) {
       props.subtitle
     )
   );
+};
+
+Header.defaultProps = {
+  title: "Indecision App"
 };
 
 var Action = function Action(props) {
@@ -162,9 +169,7 @@ var AddOption = function (_React$Component2) {
       var error = this.props.handleAddOption(optionText);
 
       this.setState(function () {
-        return {
-          error: error
-        };
+        return { error: error };
       });
     }
   }, {
@@ -173,6 +178,11 @@ var AddOption = function (_React$Component2) {
       return React.createElement(
         'div',
         null,
+        this.state.error && React.createElement(
+          'p',
+          null,
+          this.state.error
+        ),
         React.createElement(
           'form',
           { onSubmit: this.handleAddOption },

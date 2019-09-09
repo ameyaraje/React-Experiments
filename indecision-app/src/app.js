@@ -5,7 +5,7 @@ class IndecisonApp extends React.Component {
     this.handleSelectOption = this.handleSelectOption.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
     this.state = {
-      options: ['One', 'Two', 'Three', 'Four', 'Five']
+      options: props.options
     };
   }
 
@@ -23,11 +23,11 @@ class IndecisonApp extends React.Component {
   }
 
   handleAddOption(option) {
-    if(!option){
-      alert('Enter an option you banana')
-    }
-    else if (this.state.options.indexOf >= 0) {
-      alert('This option already exists')
+    if (!option) {
+      return alert('Enter valid value to add item');
+    } 
+    else if (this.state.options.indexOf(option) > -1) {
+      return alert('This option already exists');
     }
 
     this.setState((prevState) => {
@@ -38,12 +38,11 @@ class IndecisonApp extends React.Component {
   }
 
   render() {
-    const title = "Indecision App";
     const subtitle = "You're a slave now";
 
     return (
       <div>
-        <Header title={title} subtitle={subtitle}/>
+        <Header subtitle={subtitle}/>
         <Action 
           hasOptions={this.state.options.length > 0} 
           handleSelectOption={this.handleSelectOption}
@@ -60,6 +59,10 @@ class IndecisonApp extends React.Component {
   }
 }
 
+IndecisonApp.defaultProps = {
+  options: []
+};
+
 const Header = (props) => {
   return (
     <div>
@@ -67,6 +70,10 @@ const Header = (props) => {
         <h2>{props.subtitle}</h2>
     </div>
   );
+};
+
+Header.defaultProps = {
+  title: "Indecision App"
 };
 
 const Action = (props) => {
@@ -111,17 +118,14 @@ class AddOption extends React.Component {
     e.preventDefault();
     const optionText = e.target.elements.option.value.trim(); // e -> event; e.target -> <form>; e.target.elements -> [<element>....<element>]; e.target.elements."name-of-option".value -> shiz we want
     const error = this.props.handleAddOption(optionText);
-    
-    this.setState(() => {
-      return {
-        error: error
-      };
-    });
+
+    this.setState(() => ({ error }));
   }
   
   render() {
     return (
       <div>
+      {this.state.error && <p>{this.state.error}</p>}
       <form onSubmit={this.handleAddOption}>
         <input type="text" name="option"></input>
         <button>AddOption</button>      

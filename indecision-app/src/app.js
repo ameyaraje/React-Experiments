@@ -21,6 +21,14 @@ const deleteOptions = () => {
     renderIndecisionApp();
 };
 
+const makeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    // console.log(randomNum);
+    alert(option);
+
+};
+
 var appRoot = document.getElementById('app');
 
 const renderIndecisionApp = () => {
@@ -30,10 +38,14 @@ const renderIndecisionApp = () => {
             {app.subtitle && <p>{app.subtitle}</p>}
             {app.options.length > 0 ? "Here are your options" : "No options specified"}
             <p>Number of options: {app.options.length}</p>
+            <button disabled={app.options.length === 0} onClick={makeDecision}>What do I do?</button>
             <button onClick={deleteOptions}>Remove Options</button>
             <ol>
-                <li>Item One</li>
-                <li>Item Two</li>
+                {
+                    app.options.map((option) => {
+                        return <li key={option}>{option}</li>;
+                    })
+                }
             </ol>
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option"></input>

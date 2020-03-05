@@ -1,48 +1,54 @@
 class Counter extends React.Component {
-    constructor(props) {
+
+    constructor (props) {
         super(props);
-        this.handleAdd = this.handleAdd.bind(this);
-        this.handleReset = this.handleReset.bind(this);
-        this.handleSubtract = this.handleSubtract.bind(this);
+        this.addOne = this.addOne.bind(this);
+        this.removeOne = this.removeOne.bind(this) ;
+        this.resetCounter = this.resetCounter.bind(this);
         this.state = {
-            count: 0
+            count: props.count
         };
     }
 
-    handleAdd() {
+    addOne() {
         this.setState((prevState) => {
             return {
                 count: prevState.count +1
             };
+            
         });
     }
 
-    handleSubtract() { 
+    removeOne() {
         this.setState((prevState) => {
             return {
                 count: prevState.count -1
             };
         });
     }
-    
-    handleReset() {
-        this.setState((prevState) => {
+
+    resetCounter() {
+        this.setState(() => {
             return {
                 count: 0
             };
         });
     }
 
-    render() {
+    render () {
         return (
             <div>
                 <h1>Count: {this.state.count}</h1>
-                <button onClick={this.handleAdd}>+1</button>
-                <button onClick={this.handleSubtract}>-1</button>
-                <button onClick={this.handleReset}>reset</button>
+                <button onClick={this.addOne}>+1</button>
+                <button onClick={this.removeOne}>-1</button>
+                <button onClick={this.resetCounter}>Reset</button>
             </div>
-        )
+        );
     }
 }
+
+Counter.defaultProps = {
+    count: 10
+};
 
 ReactDOM.render(<Counter />, document.getElementById('app'));

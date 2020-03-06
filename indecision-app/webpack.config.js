@@ -7,5 +7,12 @@ module.exports = {
         // usage of 'path' makes more sense so the project is portable
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
+    },
+    module: {
+        rules: [{
+            loader: 'babel-loader',
+            test: /\.js$/,
+            exclude: /node_modules/
+        }]
     }
 };

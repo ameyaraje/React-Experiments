@@ -4,5 +4,6 @@ html {
 
 body {
     font-family: 'Courier New';
-    font-size: 1.6rem;
+    font-size: $medium-size;
+    background: $dark-blue;
 }

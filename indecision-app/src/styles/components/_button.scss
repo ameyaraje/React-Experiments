@@ -8,7 +8,7 @@
     font-weight: bold;
     font-size: $large-size;
     width: 100%;
-    margin-bottom: $xl-size;
+    margin-bottom: $medium-size;
     padding: 2.4rem;
 }
 
@@ -33,4 +33,11 @@
     border: none;
     color: $light-purple;
     padding: 0;
+}
+
+@media (min-width: $desktop-break-point) {
+    .big-button {
+        margin-bottom: $xl-size;
+    }
+
 }

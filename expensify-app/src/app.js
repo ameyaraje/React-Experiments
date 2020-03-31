@@ -30,9 +30,16 @@ store.dispatch(addExpense({
     createdAt: -43000
 }));
 
+store.dispatch(addExpense({
+    description: 'Nandos',
+    note: 'dinner with friends',
+    amount: 1400,
+    createdAt: 65000
+}));
+
 console.log(store.getState());
 
-store.dispatch(setTextFilter('bill'));
+store.dispatch(setTextFilter('nan'));
 
 const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);

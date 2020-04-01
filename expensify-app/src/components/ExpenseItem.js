@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { removeExpense } from '../actions/expenses';
 
 const ExpenseItem = (props) => {
-    console.log(props);
+    // console.log(props);
     return (
         <div>
             <p>
@@ -17,7 +17,8 @@ const ExpenseItem = (props) => {
                 CreatedAt: {props.item.createdAt}
             </p>
             <button onClick={() => {
-                props.dispatch(removeExpense(props.item.id));
+                var id = props.item.id 
+                props.dispatch(removeExpense({id}));
             }} >
                 Remove Expense
             </button>

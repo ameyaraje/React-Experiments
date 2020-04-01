@@ -37,9 +37,16 @@ store.dispatch(addExpense({
     createdAt: 65000
 }));
 
+store.dispatch(addExpense({
+    description: 'rent',
+    note: 'for july 2019',
+    amount: 109100,
+    createdAt: 600
+}));
+
 console.log(store.getState());
 
-store.dispatch(setTextFilter('nan'));
+// store.dispatch(setTextFilter('nan'));
 
 const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);

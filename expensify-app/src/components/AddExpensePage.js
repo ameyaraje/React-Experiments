@@ -1,9 +1,14 @@
 import React from 'react';
 
+import ExpenseForm from './ExpenseForm';
+
 const AddExpensePage = () => {
     return (
         <div>
-            From the Add Expense Page
+            <h2>
+                From the Add Expense Page
+            </h2>
+            <ExpenseForm />
         </div>
     );
 };

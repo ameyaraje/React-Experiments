@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { removeExpense } from '../actions/expenses';
 
@@ -8,7 +8,10 @@ const ExpenseItem = (props) => {
     return (
         <div>
             <p>
-                Name: {props.item.description}
+                Name: 
+                <Link to={`/edit/${props.item.id}`}>
+                    {props.item.description}
+                </Link>
             </p>
             <p>
                 Amount: {props.item.amount}
@@ -16,14 +19,8 @@ const ExpenseItem = (props) => {
             <p>
                 CreatedAt: {props.item.createdAt}
             </p>
-            <button onClick={() => {
-                var id = props.item.id 
-                props.dispatch(removeExpense({id}));
-            }} >
-                Remove Expense
-            </button>
         </div>
     );
 };
 
-export default connect()(ExpenseItem);
+export default ExpenseItem;

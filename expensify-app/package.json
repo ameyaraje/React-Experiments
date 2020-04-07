@@ -34,7 +34,8 @@
     "uuid": "^7.0.2",
     "validator": "^12.2.0",
     "webpack": "^4.42.0",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "minimist": "1.2.5"
   },
   "devDependencies": {
     "webpack-cli": "^3.3.11"
